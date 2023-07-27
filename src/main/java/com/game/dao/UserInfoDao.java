@@ -9,6 +9,8 @@ public interface UserInfoDao {
 	
 	Map<String,String> selectUserInfo(String uiNum);
 	
+	Map<String,String> selectUserInfoById(String uiId);
+	
 	int insertUserInfo(Map<String,String> userInfo);
 	
 	int updateUserInfo(Map<String,String> userInfo);
