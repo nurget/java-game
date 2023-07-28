@@ -24,7 +24,7 @@
 				<a href="#" class="badge badge-success">Content</a>
 				<textarea class="form-control" id="biContent" name="biContent" placeholder="내용" value="${board.biContent }"></textarea>
 			</div>
-		 	<div class="button-div" style="align:right">
+		 	<div class="button-div">
 			<button type="submit" class="btn btn-outline-success">수정</button>
 			</div>
 		</form>

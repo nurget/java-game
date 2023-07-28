@@ -13,7 +13,7 @@
 	<div class="container">
 		<form method="POST" action="/board-info/delete">
 			<input type="hidden" name="biNum" value="${board.biNum}">
-			<table class="table table-borderd">
+			<table class="table table-borderless">
 
 				<thead>
 					<tr>
@@ -49,10 +49,10 @@
 						<td>${board.cretim}</td>
 					</tr>
 					<c:if test="${user.uiNum == board.uiNum }">
-						<tr>
-							<th colspan="2">
-								<button type="button" onclick="goPage('/board-info/update?biNum=${board.biNum}')">수정</button>
-								<button>삭제</button>
+						<tr class="text-right">
+							<th colspan="2" style="align-item:right">
+								<button type="button" class="btn btn-primary" onclick="goPage('/board-info/update?biNum=${board.biNum}')">수정</button>
+								<button type="button" class="btn btn-danger">삭제</button>
 							</th>
 						</tr>
 					</c:if>
