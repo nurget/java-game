@@ -25,13 +25,13 @@
 				</tr>
 			</thead>
 			<tbody>
-				<c:forEach items="${boardInfoList}" var="boardInfo">
+				<c:forEach items="${biList}" var="board">
 					<tr>
-						<th>${boardInfo.biNum }</th>
-						<td><a href="/board-info/view?biNum=${boardInfo.biNum }">${boardInfo.biTitle }</a></td>
-						<td>${boardInfo.uiNum }</td>
-						<td>${boardInfo.credat }</td>
-						<td>${boardInfo.cretim }</td>
+						<th>${board.biNum }</th>
+						<td><a href="/board-info/view?biNum=${board.biNum }">${board.biTitle }</a></td>
+						<td>${board.uiNum }</td>
+						<td>${board.credat }</td>
+						<td>${board.cretim }</td>
 					</tr>
 				</c:forEach>
 				<tr>

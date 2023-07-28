@@ -9,5 +9,5 @@ public interface BoardInfoService {
 	Map<String,String> selectBoardInfo(String biNum);
 	int insertBoardInfo (Map<String,String> board);
 	int updateBoardInfo (Map<String,String> board);
-	int deleteBoardinfo(String biNum);
+	int deleteBoardInfo(String biNum);
 }

@@ -17,7 +17,7 @@ public class BoardInfoServiceImpl implements BoardInfoService {
 
 	@Override
 	public Map<String, String> selectBoardInfo(String biNum) {
-		return boardInfoDAO.selectBoardinfo(biNum);
+		return boardInfoDAO.selectBoardInfo(biNum);
 	}
 
 	@Override
@@ -31,7 +31,7 @@ public class BoardInfoServiceImpl implements BoardInfoService {
 	}
 
 	@Override
-	public int deleteBoardinfo(String biNum) {
+	public int deleteBoardInfo(String biNum) {
 		return boardInfoDAO.deleteBoardinfo(biNum);
 	}
 

@@ -12,43 +12,43 @@
 	<h3 style="text-align: center">게시판 상세화면</h3>
 	<div class="container">
 		<form method="POST" action="/board-info/delete">
-			<input type="hidden" name="biNum" value="${boardInfo.biNum}">
+			<input type="hidden" name="biNum" value="${board.biNum}">
 			<table class="table table-borderd">
 
 				<thead>
 					<tr>
 						<th scope="col">번호</th>
-						<td>${boardInfo.biNum}</td>
+						<td>${board.biNum}</td>
 					</tr>
 					<tr>
 						<th scope="col">제목</th>
-						<td>${boardInfo.biTitle}</td>
+						<td>${board.biTitle}</td>
 					</tr>
 					<tr>
 						<th scope="col">내용</th>
-						<td>${boardInfo.biContent}</td>
+						<td>${board.biContent}</td>
 					</tr>
 					<tr>
 						<th scope="col">작성자</th>
-						<td>${boardInfo.uiNum}</td>
+						<td>${board.uiNum}</td>
 					</tr>
 					<tr>
 						<th scope="col">작성일</th>
-						<td>${boardInfo.credat}</td>
+						<td>${board.credat}</td>
 					</tr>
 					<tr>
 						<th scope="col">작성시간</th>
-						<td>${boardInfo.cretim}</td>
+						<td>${board.cretim}</td>
 					</tr>
 					<tr>
 						<th scope="col">최종수정일</th>
-						<td>${boardInfo.lmodat}</td>
+						<td>${board.lmodat}</td>
 					</tr>
 					<tr>
 						<th scope="col">최종수정시간</th>
-						<td>${boardInfo.cretim}</td>
+						<td>${board.cretim}</td>
 					</tr>
-					<c:if test="${user.uiName == boardInfo.uiNum }">
+					<c:if test="${user.uiNum == board.uiNum }">
 						<tr>
 							<th colspan="2">
 								<button type="button" onclick="goPage('/board-info/update?biNum=${board.biNum}')">수정</button>
