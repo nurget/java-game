@@ -39,7 +39,7 @@ public class MybatisSqlSessionFactory {
 			BoardInfoVO bi = new BoardInfoVO();
 			bi.setBiNum(6);
 			bi.setBiTitle("mapper test");
-			bi.setBiContent("처음으로 하는 마이바티스트 인서트");
+			bi.setBiContent("두번째로 하는 마이바티스트 인서트");
 			bi.setUiNum(3);
 			int result = biMapper.insertBoardInfo(bi);
 			System.out.println("insert result : " + result);

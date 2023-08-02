@@ -10,7 +10,6 @@ public class BoardInfoVO {
 	private String cretim;
 	private String lmodat;
 	private String lmotim;
-	private String active;
 	
 	public int getBiNum() {
 		return biNum;
@@ -60,23 +59,15 @@ public class BoardInfoVO {
 	public void setLmotim(String lmotim) {
 		this.lmotim = lmotim;
 	}
-	public String getActive() {
-		return active;
-	}
-	public void setActive(String active) {
-		this.active = active;
-	}
-	
 	@Override
 	public String toString() {
 		return "BoardInfoVO [biNum=" + biNum + ", biTitle=" + biTitle + ", biContent=" + biContent + ", uiNum=" + uiNum
-				+ ", credat=" + credat + ", cretim=" + cretim + ", lmodat=" + lmodat + ", lmotim=" + lmotim
-				+ ", active=" + active + "]";
+				+ ", credat=" + credat + ", cretim=" + cretim + ", lmodat=" + lmodat + ", lmotim=" + lmotim + "]";
 	}
+	
 	public static void main(String[] args) {
 		BoardInfoVO bi = new BoardInfoVO();
 		bi.setBiTitle("안녕");
 		System.out.println(bi);
 	}
-	
 }
