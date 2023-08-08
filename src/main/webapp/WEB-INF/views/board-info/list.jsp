@@ -53,7 +53,7 @@
 			const searchType = document.querySelector('#searchType');
 			
 			let url = '/json/list?';
-			if(searchStr.value!=='') {
+			if(searchStr.value!='') {
 				url += 'searchType=' + searchType.value + '&searchStr=' + searchStr.value;
 			}
 			
