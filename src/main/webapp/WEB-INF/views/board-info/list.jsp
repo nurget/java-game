@@ -1,49 +1,87 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<jsp:include page="/WEB-INF/views/common/head.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/common/head.jsp" />
 </head>
 <body>
-	<h3 style="text-align:center">발로란트 게시판</h3>
-	<div class="container">
+	<h3>게시판</h3>
 
-		<table class="table" style="text-align:center">
+	<select name="searchType" id="searchType">
+		<option value="1">제목</option>
+		<option value="2">작성자</option>
+		<option value="3">내용</option>
+		<option value="4">제목+내용</option>
+		<option value="5">작성자+내용</option>
+		<option value="6">제목+작성자</option>
+		<option value="7">제목+작성자+내용</option>
+	</select>
+	<input type="text" name="searchStr" placeholder="검색어" id="searchStr">
+	<button onclick="loadFunc()" type="button" class="btn btn-success">검색</button>
+
+	<div class="container">
+		<table class="table table-bordered">
 			<thead>
-				<tr class="table-success">
+				<tr>
 					<th scope="col">번호</th>
 					<th scope="col">제목</th>
 					<th scope="col">작성자</th>
 					<th scope="col">작성일</th>
-					<th scope="col">작성시간</th>
-
 				</tr>
 			</thead>
-			<tbody>
-				<c:forEach items="${biList}" var="board">
-					<tr>
-						<th>${board.biNum }</th>
-						<td><a href="/board-info/view?biNum=${board.biNum }">${board.biTitle }</a></td>
-						<td>${board.uiNum }</td>
-						<td>${board.credat }</td>
-						<td>${board.cretim }</td>
-					</tr>
-				</c:forEach>
-				<tr>
-					<td colspan="5" align="right"><button type="button" class="btn btn-success" onclick="goPage('/board-info/insert')">등록</button></td>
-				</tr>
+			<tbody id="tBody">
 			</tbody>
+			<tr>
+				<td colspan="4" align="right">
+					<button type="button" class="btn btn-success"
+						onclick="goPage('/board-info/insert')">등록</button>
+				</td>
+			</tr>
 		</table>
 	</div>
 	<script>
 		function goPage(url) {
 			location.href = url;
 		}
+		const loadFunc = function() {
+			const xhr = new XMLHttpRequest();
+			const searchStr = document.querySelector('#searchStr');
+			const searchType = document.querySelector('#searchType');
+			
+			let url = '/json/list?';
+			if(searchStr.value!=='') {
+				url += 'searchType=' + searchType.value + '&searchStr=' + searchStr.value;
+			}
+			
+			
+			xhr.open('GET', url);
+			xhr.onreadystatechange = function() {
+				if (xhr.readyState === 4) {
+					if (xhr.status === 200) {
+						const list = JSON.parse(xhr.responseText);
+						let html = '';
+						for (const board of list) {
+							html += '<tr>';
+							html += '<td>' + board.biNum+ '</td>';
+							html += '<td><a href="/views/board-info/view?biNum=' + board.biNum +'">' + board.biTitle + '</td>';
+							html += '<td>' + board.uiNum + '</td>';
+							html += '<td>' + board.credat+ '</td>';
+							html += '</tr>';
+						}
+						document.querySelector('#tBody').innerHTML = html;
+					}
+				}
+			}
+			xhr.send();
+		}
+		window.addEventListener('load', loadFunc);
 	</script>
 </body>
 </html>
+
+
+

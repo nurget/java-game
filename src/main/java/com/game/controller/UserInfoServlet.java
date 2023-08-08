@@ -15,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import com.game.common.CommonView;
 import com.game.service.UserInfoService;
 import com.game.service.impl.UserInfoServiceImpl;
+import com.game.vo.UserInfoVO;
 
 
 @WebServlet("/user-info/*")
@@ -25,7 +26,7 @@ public class UserInfoServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String cmd = CommonView.getCmd(request);
 		if("list".equals(cmd)) {
-			List<Map<String,String>> userInfoList = uiService.selectUserInfoList(null);
+			List<UserInfoVO> userInfoList = uiService.selectUserInfoList(null);
 			request.setAttribute("userInfoList", userInfoList);
 		}else if("view".equals(cmd) || "update".equals(cmd)) {
 			String uiNum = request.getParameter("uiNum");

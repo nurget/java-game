@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.game.common.CommonView;
 import com.game.service.BoardInfoService;
 import com.game.service.impl.BoardInfoServiceImpl;
 import com.game.vo.BoardInfoVO;
@@ -22,9 +23,19 @@ public class JsonServlet extends HttpServlet {
 	private Gson gson = new Gson();
 	private BoardInfoService biService = new BoardInfoServiceImpl();
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		List<Map<String,String>> biList = biService.selectBoardInfoList(null);
-		String json = gson.toJson(biList);
+		String json = "";
+		String cmd = CommonView.getCmd(request);
+		if("list".equals(cmd)) {
+			BoardInfoVO board = new BoardInfoVO();
+			board.setSearchType(request.getParameter("searchType"));
+			board.setSearchStr(request.getParameter("searchStr"));
+			json = gson.toJson(biService.selectBoardInfoList(board));
+		} else if("one".equals(cmd)) {
+			String biNum = request.getParameter("biNum");
+			json = gson.toJson(biService.selectBoardInfo(biNum));
+		}
+		
+		
 	    response.setHeader("Access-Control-Allow-Origin", "*");
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();

@@ -15,10 +15,9 @@ import javax.servlet.http.HttpSession;
 import com.game.common.CommonView;
 import com.game.service.BoardInfoService;
 import com.game.service.impl.BoardInfoServiceImpl;
+import com.game.vo.BoardInfoVO;
 
-/**
- * Servlet implementation class BoardInfoServlet
- */
+
 @WebServlet("/board-info/*")
 public class BoardInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -43,11 +42,18 @@ public class BoardInfoServlet extends HttpServlet {
 		}
 		String cmd = CommonView.getCmd(request);
 		if ("list".equals(cmd)) {
-			List<Map<String, String>> list = biService.selectBoardInfoList(null);
-			request.setAttribute("biList", list);
+			Map<String,String> param = null;
+			if(request.getParameter("searchType")!=null) {
+				param = new HashMap<>();
+				String key = request.getParameter("searchType");
+				String value = request.getParameter("searchStr");
+				param.put("key", key);
+				param.put("value", value);
+			}
+			request.setAttribute("biList", biService.selectBoardInfoList(null));
 		} else if ("view".equals(cmd) || "update".equals(cmd)) {
 			String biNum = request.getParameter("biNum");
-			Map<String, String> board = biService.selectBoardInfo(biNum);
+			BoardInfoVO board = biService.selectBoardInfo(biNum);
 			request.setAttribute("board", board);
 		}
 		CommonView.forward(request, response);
