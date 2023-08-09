@@ -26,7 +26,7 @@ public class BoardInfoServiceImpl implements BoardInfoService {
 		} catch(Exception e) {
 			throw e;
 		}
-		
+
 	}
 
 	@Override

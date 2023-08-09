@@ -9,8 +9,8 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import com.game.mapper.UserInfoMapper;
-import com.game.vo.UserInfoVO;
+import com.game.mapper.OverInfoMapper;
+import com.game.vo.OverInfoVO;
 
 public class MybatisSqlSessionFactory {
 
@@ -33,8 +33,8 @@ public class MybatisSqlSessionFactory {
 	public static void main(String[] args) {
 		SqlSessionFactory ssf = getSqlSessionFactory();
 		SqlSession session = ssf.openSession();
-		UserInfoMapper uiMapper = session.getMapper(UserInfoMapper.class);
-		List<UserInfoVO> list = uiMapper.selectUserInfoList(null);
+		OverInfoMapper oiMapper = session.getMapper(OverInfoMapper.class);
+		List<OverInfoVO> list = oiMapper.selectOverInfoList(null);
 		System.out.println(list);
 	}
 }

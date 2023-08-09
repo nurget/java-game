@@ -12,4 +12,5 @@ public interface TestInfoService {
 	int insertTestInfo (Map<String,String> test);
 	int updateTestInfo (Map<String,String> test);
 	int deleteTestInfo(String tiNum);
+	Map<String, String> login(String tiId);
 }

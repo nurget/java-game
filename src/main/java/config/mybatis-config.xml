@@ -29,6 +29,7 @@
 		<mapper resource="mybatis/BoardInfoMapper.xml"/> 
 		<mapper resource="mybatis/UserInfoMapper.xml"/> 
 		<mapper resource="mybatis/TestInfoMapper.xml"/> 
+		<mapper resource="mybatis/OverInfoMapper.xml"/> 
 	</mappers>
 	
 	

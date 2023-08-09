@@ -5,15 +5,15 @@ import java.util.Map;
 
 public interface TestInfoDAO {
 
-	List<Map<String,String>> selectTestInfoList(Map<String,String> testInfo);
+	List<Map<String,String>> selectTestInfoList(Map<String,String> test);
 	
 	Map<String,String> selectTestInfo(String tiNum);
 	
 	Map<String,String> selectTestInfoById(String tiName);
 	
-	int insertUserInfo(Map<String,String> testInfo);
+	int insertUserInfo(Map<String,String> test);
 	
-	int updateUserInfo(Map<String,String> testInfo);
+	int updateUserInfo(Map<String,String> test);
 	
 	int deleteUserInfo(String tiNum);
 }
