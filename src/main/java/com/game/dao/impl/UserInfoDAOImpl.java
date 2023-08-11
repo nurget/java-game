@@ -3,6 +3,7 @@ package com.game.dao.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,8 +19,16 @@ public class UserInfoDAOImpl implements UserInfoDao {
 		String sql ="SELECT UI_NUM, UI_NAME, UI_ID, UI_PWD, UI_IMG_PATH, UI_DESC ,\r\n"
 				+ "UI_BIRTH, CREDAT, CRETIM, LMODAT, LMOTIM, ACTIVE FROM USER_INFO";
 		List<Map<String, String>> userList = new ArrayList<>();
-
-		try(Connection con = DBCon.getCon()){
+		if (userInfo != null) {
+			String key = userInfo.get("key");
+			if ("1".equals(key)) {
+				sql += " AND UI_NUM LIKE CONCAT('%',?,'%')";
+			} else if ("2".equals(key)) {
+				sql += " AND UI_NAME LIKE CONCAT('%',?,'%')";
+			} 
+		}
+		
+		try(Connection con = DBCon.getCon()) {
 			try(PreparedStatement ps = con.prepareStatement(sql)){
 				try(ResultSet rs = ps.executeQuery()){
 					while(rs.next()) {
@@ -146,28 +155,28 @@ public class UserInfoDAOImpl implements UserInfoDao {
 		return 0;
 	}
 
-	public static void main(String[] args) {
-		UserInfoDao uiDAO = new UserInfoDAOImpl();
-		Map<String,String> map = new HashMap<>();
-		map.put("uiName", "test");
-		map.put("uiId", "test");
-		map.put("uiPwd", "test");
-		map.put("uiDesc", "test");
-		map.put("uiBirth", "20100510");
-		List<Map<String,String>> userInfoList = uiDAO.selectUserInfoList(null);
-		for(Map<String,String> userInfo : userInfoList) {
-			System.out.println(userInfo);
-		}
-		Map<String,String> userInfo = uiDAO.selectUserInfo("1");
-		System.out.println(userInfo);
-		userInfo.put("uiName", "updateTest");
-		int result = uiDAO.updateUserInfo(userInfo);
-		System.out.println(result);
-		userInfo = uiDAO.selectUserInfo("1");
-		System.out.println(userInfo);
-		result = uiDAO.deleteUserInfo("1");
-		System.out.println(result);
-	}
+//	public static void main(String[] args) {
+//		UserInfoDao uiDAO = new UserInfoDAOImpl();
+//		Map<String,String> map = new HashMap<>();
+//		map.put("uiName", "test");
+//		map.put("uiId", "test");
+//		map.put("uiPwd", "test");
+//		map.put("uiDesc", "test");
+//		map.put("uiBirth", "20100510");
+//		List<Map<String,String>> userInfoList = uiDAO.selectUserInfoList(null);
+//		for(Map<String,String> userInfo : userInfoList) {
+//			System.out.println(userInfo);
+//		}
+//		Map<String,String> userInfo = uiDAO.selectUserInfo("1");
+//		System.out.println(userInfo);
+//		userInfo.put("uiName", "updateTest");
+//		int result = uiDAO.updateUserInfo(userInfo);
+//		System.out.println(result);
+//		userInfo = uiDAO.selectUserInfo("1");
+//		System.out.println(userInfo);
+//		result = uiDAO.deleteUserInfo("1");
+//		System.out.println(result);
+//	}
 
 	@Override
 	public Map<String, String> selectUserInfoById(String uiId) {
@@ -201,4 +210,29 @@ public class UserInfoDAOImpl implements UserInfoDao {
 		}
 		return null;
 	}
+	
+	public static void main(String[] args) {
+	    UserInfoDao uiDAO = new UserInfoDAOImpl();
+
+	    // UI_NUM으로 검색
+	    Map<String, String> searchByNum = new HashMap<>();
+	    searchByNum.put("key", "1");
+	    searchByNum.put("value", "2");
+	    List<Map<String, String>> userListByNum = uiDAO.selectUserInfoList(searchByNum);
+	    for (Map<String, String> userInfo : userListByNum) {
+	        System.out.println(userInfo);
+	    }
+
+	    // UI_NAME으로 검색
+	    Map<String, String> searchByName = new HashMap<>();
+	    searchByName.put("key", "2");
+	    searchByName.put("value", "test");
+	    List<Map<String, String>> userListByName = uiDAO.selectUserInfoList(searchByName);
+	    for (Map<String, String> userInfo : userListByName) {
+	        System.out.println(userInfo);
+	    }
+	}
+
 }
+
+
